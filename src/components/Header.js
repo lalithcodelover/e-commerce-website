@@ -1,17 +1,16 @@
 import React from "react";
 import classes from "./Header.module.css";
+import HeaderCartButton from "./HeaderCartButton";
 
-const Header = () => {
+const Header = (props) => {
   return (
-    <div>
+    <div className={classes.headbar}>
       <div className={classes.header}>
-        <div>HOME</div>
-        <div>STORE</div>
-        <div>ABOUT</div>
+        <div><a href="./"> HOME</a></div>
+        <div><a href="./">STORE</a></div>
+        <div><a href='./'>ABOUT</a></div>
       </div>
-      <div className={classes.cart}>
-        <span>Cart</span>
-      </div>
+        <HeaderCartButton onShow={props.onShow}/>
     </div>
   );
 };

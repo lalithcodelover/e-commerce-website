@@ -1,4 +1,4 @@
-.header {
+/* .header {
     background-color: black;
     color: white;
     align-content: center;
@@ -8,6 +8,7 @@
     padding-bottom: 30px;
     padding-left: 35%;
     margin: 0%;
+    position: fixed;
     
 }
 
@@ -27,4 +28,35 @@
     top: 30px;
     color: white;
     font-size:larger;
+} */
+
+.headbar {
+    display: flex;
+    padding-bottom: 10px;
+    position: fixed;
+    width: 100%;
+    background: black;
+    color: white;
+    margin: 0;
+    border-bottom: 1px solid white;
+    padding-top: 10px;
 }
+
+.header {
+    display: flex;
+    width: 90%;
+    padding-left: 32%;
+    font-size: large;
+    font-weight: 700;
+}
+.header div {
+    padding: 0 50px;
+}
+.header div a {
+    text-decoration: none;
+    color: white;
+}
+/* .cart {
+    width: 10%;
+} */
+

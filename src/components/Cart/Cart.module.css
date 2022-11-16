@@ -1,0 +1,14 @@
+.cart {
+    width: 15%;
+    background-color:black;
+    height: 2rem;
+    align-content: center;
+}
+.cart h3 {
+    text-align: center;
+    margin: 0%;
+}
+
+.cartlist {
+    display: flex;
+}

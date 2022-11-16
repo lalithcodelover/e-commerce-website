@@ -1,6 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import Cart from "./components/Cart/Cart";
 const productsArr = [
   {
     title: "Colors",
@@ -25,6 +26,7 @@ const productsArr = [
 ];
 
 function App() {
+  const [cart,setCart] = useState(false)
   const productList = productsArr.map((product) => {
     return (
       <div className="products">
@@ -38,12 +40,22 @@ function App() {
     );
   });
 
+  const openCartHandler =()=> {
+    setCart(true)
+  }
+
+  const closeCartHandller =()=> {
+    setCart(false)
+  }
+
   return (
     <Fragment>
-      <Header />
+      {cart && <Cart onClose={closeCartHandller}/>}
+      <Header onShow={openCartHandler} />
       <div className="title">
         <h1>The Generics</h1>
       </div>
+      <h1 className='category'>Music</h1>
       <main>{productList}</main>
     </Fragment>
   );
