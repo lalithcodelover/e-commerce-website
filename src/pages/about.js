@@ -1,6 +1,7 @@
 import React from "react";
 import design from './about.jpg'
 import './About.css'
+import 'font-awesome/css/font-awesome.min.css'
 const About = () => {
   return (
     <div>
@@ -31,6 +32,14 @@ const About = () => {
           him? Him whom something large cisterns.
         </p>
       </div>
+      <footer>
+        <div>
+            <h1>The Generics</h1>
+        </div>
+        <div>
+        <i className="fa-brands fa-youtube">Logos</i>
+        </div>
+      </footer>
     </div>
   );
 };

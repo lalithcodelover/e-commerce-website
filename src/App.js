@@ -6,6 +6,7 @@ import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
 import AlbumList from "./components/AlbumList";
 import About from "./pages/about";
+import Home from "./pages/Home";
 const productsArr = [
   {
     id: "a1",
@@ -78,6 +79,9 @@ function App() {
           <h1>The Generics</h1>
         </div>
         <About/>
+      </Route>
+      <Route path='/home'>
+        <Home/>
       </Route>
     </CartProvider>
   );
