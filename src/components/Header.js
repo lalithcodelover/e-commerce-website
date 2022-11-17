@@ -1,14 +1,15 @@
 import React from "react";
 import classes from "./Header.module.css";
+import {NavLink} from 'react-router-dom'
 import HeaderCartButton from "./HeaderCartButton";
 
 const Header = (props) => {
   return (
     <div className={classes.headbar}>
       <div className={classes.header}>
-        <div><a href="./"> HOME</a></div>
-        <div><a href="./">STORE</a></div>
-        <div><a href='./'>ABOUT</a></div>
+        <div><NavLink  activeClassName="active" to="/home"> HOME</NavLink></div>
+        <div><NavLink activeClassName="active" to="/store">STORE</NavLink></div>
+        <div><NavLink activeClassName="active" to='/about'>ABOUT</NavLink></div>
       </div>
         <HeaderCartButton onShow={props.onShow}/>
     </div>

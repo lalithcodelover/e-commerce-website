@@ -59,4 +59,8 @@
 /* .cart {
     width: 10%;
 } */
-
+div a.active {
+    color: lightgreen;
+    padding-bottom: 5px;
+    border-bottom: 4px solid white;
+}
