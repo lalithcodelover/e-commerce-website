@@ -1,48 +1,45 @@
-import React from 'react'
-import Modal from '../UI/Modal'
-import classes from './Cart.module.css'
+import React, { useContext } from "react";
+import CartContext from "../../store/cart-context";
 
-const cartElements = [
-    {
-    title: 'Colors',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-    quantity: 2,
-    },
-    {
-    title: 'Black and white Colors',
-    price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-    quantity: 3,
-    },
-    {
-    title: 'Yellow and Black Colors',
-    price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-    quantity: 1,
-    }
-    ]
+import  "./Cart.css";
+
+
 const Cart = (props) => {
-    const cartList = cartElements.map((product)=>{
-        return (
-            <div className={classes.cartlist}>
-        <div >
-            <p>{product.title}</p>
-            <img src={product.imageUrl} alt={product.title} width='100px'/>
-            <p>Quantity:{product.quantity}</p>
-            <p>{product.price}</p>
-        </div>
-        <div>
-            <button>Remove</button>
-        </div>
-        </div>
-        )
-    }) 
-  return (
-    <Modal onClose={props.onClose}>
-{cartList}
-</Modal>
-  )
-}
+    const cartCtx = useContext(CartContext)
 
-export default Cart
+    const removeItemHandler = (product)=>{
+        cartCtx.removeItem(product)
+    }
+  const cartList = cartCtx.items.map((product) => {
+    return (
+      <div className='cartitems'>
+        <span className="cart-col">
+          <img src={product.imageUrl} alt={product.title} width="100px" />
+          <span>{product.title}</span>
+        </span>
+        <span className='cart-col'>
+          <span>${product.price}</span>
+        </span>
+        <span className='cart-col'>
+          <span>Quantity:{product.quantity}</span>
+          <button className="remove-item" onClick={()=>removeItemHandler(product)}>Remove</button>
+        </span>
+      </div>
+    );
+  });
+
+  return (
+    <div className='cartbox'>
+        <button className="close-cart" onClick={props.onClose}>X</button>
+      <div className='headings'>
+        <div>ITEM</div>
+        <div>PRICE</div>
+        <div>QUANTITY</div>
+      </div>
+      <div className='cartdetails'>{cartList}</div>;
+      <div>Total</div>
+    </div>
+  );
+};
+
+export default Cart;
