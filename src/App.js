@@ -1,13 +1,14 @@
 import "./App.css";
 import Header from "./components/Header";
 import React, { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
 import AlbumList from "./components/AlbumList";
 import About from "./pages/about";
 import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
+import ProductDetail from "./pages/ProductDetail";
 
 const productsArr = [
   {
@@ -76,10 +77,11 @@ function App() {
     const data = await response.json();
     console.log(data);
   };
-  
+
   return (
     <CartProvider>
-      <Route path="/store">
+      <Switch>
+      <Route path="/store" exact>
         {cart && <Cart onClose={closeCartHandller} />}
         <Header onShow={openCartHandler} />
         <div className="title">
@@ -103,6 +105,10 @@ function App() {
         <Header />
         <ContactUs getUserDetails={submitUserDetails} />
       </Route>
+      <Route path='/store/:productId'>
+        <ProductDetail/>
+      </Route>
+      </Switch>
     </CartProvider>
   );
 }
