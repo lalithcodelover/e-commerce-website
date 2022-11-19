@@ -7,6 +7,8 @@ import CartProvider from "./store/CartProvider";
 import AlbumList from "./components/AlbumList";
 import About from "./pages/about";
 import Home from "./pages/Home";
+import ContactUs from "./pages/ContactUs";
+
 const productsArr = [
   {
     id: "a1",
@@ -60,9 +62,23 @@ function App() {
     setCart(false);
   };
 
+  const submitUserDetails = async (details) => {
+    const response = await fetch(
+      "https://react-new-2448f-default-rtdb.firebaseio.com/users.json",
+      {
+        method: "POST",
+        body: JSON.stringify(details),
+        headers: {
+          "Context-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+  
   return (
     <CartProvider>
-
       <Route path="/store">
         {cart && <Cart onClose={closeCartHandller} />}
         <Header onShow={openCartHandler} />
@@ -78,10 +94,14 @@ function App() {
         <div className="title">
           <h1>The Generics</h1>
         </div>
-        <About/>
+        <About />
       </Route>
-      <Route path='/home'>
-        <Home/>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/contact">
+        <Header />
+        <ContactUs getUserDetails={submitUserDetails} />
       </Route>
     </CartProvider>
   );

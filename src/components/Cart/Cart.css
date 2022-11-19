@@ -97,3 +97,8 @@ border-color: lightcoral;
     background-color: rgb(250, 50, 50);
     border: 1px solid rgb(250, 50, 50);
 }
+
+.total-price {
+    font-size: 2rem;
+    margin-left: 60%;
+}

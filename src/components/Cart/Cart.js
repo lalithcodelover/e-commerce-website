@@ -27,6 +27,10 @@ const Cart = (props) => {
       </div>
     );
   });
+  let Total =0;
+  cartCtx.items.forEach((product)=> {
+    Total+=Number(product.price*product.quantity)
+  })
 
   return (
     <div className='cartbox'>
@@ -37,7 +41,7 @@ const Cart = (props) => {
         <div>QUANTITY</div>
       </div>
       <div className='cartdetails'>{cartList}</div>;
-      <div>Total</div>
+      <div className="total-price">Total: ${Total}</div>
     </div>
   );
 };

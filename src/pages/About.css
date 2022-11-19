@@ -10,11 +10,13 @@
 .content {
   width: 60%;
   margin: auto;
+  padding: 20px;
+
 }
 h1 {
     text-align: center;
+    padding: 20px 0 15px;
 }
 footer {
   background-color: aquamarine;
-
 }

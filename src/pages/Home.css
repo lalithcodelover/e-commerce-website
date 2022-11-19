@@ -38,20 +38,19 @@
 
 }
 
+.tour-title {
+
+    font-size: 2rem;
+    padding: 50px;
+    font-weight: 900;
+}
 .tour-item {
-    
-/*     
-    text-align: left;
-    width: 60%;
-margin: auto;
-padding: 15px 15px;     */
 display: flex;
     justify-content: space-between;
-    padding-top: 20px;
+    padding-top: 10px;
     align-items: center;
     width: 60%;
     margin: auto;
-    
     padding-bottom: 10px;
     border-bottom: 1px solid black;
 }
@@ -63,4 +62,14 @@ display: flex;
  }
 .tour-list {
     margin-bottom: 50px;
+}
+
+.buy-btn {
+    background-color: aqua;
+    border-color: aqua;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: white;
+
 }
