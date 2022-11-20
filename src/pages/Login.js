@@ -7,17 +7,18 @@ import './Login.css'
 const Login = () => {
 const emailInputRef = useRef('')
 const passwordInputRef = useRef('')
+
 const authCtx = useContext(CartContext)
 const history= useHistory()
     const submitHandler =(e)=>{
         e.preventDefault()
      fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCvx6z96P8JnB_mk0ZYh5cQRSRtkgwnANc',{
 method:'POST',
-body:{
+body:JSON.stringify({
     email:emailInputRef.current.value,
     password:passwordInputRef.current.value,
     returnSecureToken:true
-},
+}),
 headers:{
     'Content-Type':'application/json'
 }

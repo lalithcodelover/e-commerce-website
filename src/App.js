@@ -1,8 +1,8 @@
 import "./App.css";
 import Header from "./components/Header";
-import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import Cart from "./components/Cart/Cart";
+import React, { useContext, useState } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+
 import CartProvider from "./store/CartProvider";
 import AlbumList from "./components/AlbumList";
 import About from "./pages/about";
@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
+import CartContext from "./store/cart-context";
+import Store from "./pages/Store";
 
 const productsArr = [
   {
@@ -44,6 +46,7 @@ const productsArr = [
 
 function App() {
   const [cart, setCart] = useState(false);
+  const authCtx = useContext(CartContext)
   const productList = productsArr.map((product) => {
     return (
       <AlbumList
@@ -82,14 +85,15 @@ function App() {
   return (
     <CartProvider>
       <Switch>
-      <Route path="/store" exact>
-        {cart && <Cart onClose={closeCartHandller} />}
-        <Header onShow={openCartHandler} />
-        <div className="title">
-          <h1>The Generics</h1>
-        </div>
-        <h1 className="category">Music</h1>
-        <main>{productList}</main>
+       <Route path="/store" exact>
+       
+       {authCtx.isLoggedIn && <><Header onShow={openCartHandler} />
+        <Store onClose={closeCartHandller} cart={cart}/>
+        
+        <main>{productList}</main> 
+        </>}
+        {!authCtx.isLoggedIn && <Redirect to='/login'/>}
+       
       </Route>
 
       <Route path="/about">

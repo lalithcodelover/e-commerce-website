@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
-
+const initialState =localStorage.getItem('token')
     const [addItems,setAddItems] = useState([])
-    const [token,setToken] = useState()
+    const [token,setToken] = useState(initialState)
     const addItemToCart = (item) => {
+
     let cartItems=[...addItems]
     let hasItem=false;
     cartItems.forEach((product)=>{
@@ -35,15 +36,16 @@ const CartProvider = (props) => {
 
   const loginHandler=(token)=>{
     setToken(token)
-    localStorage.setItem(token)
+    localStorage.setItem('token',token)
   }
-
+const userIsLoggedIn = !token
   const cartContext = {
     items: addItems,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
     token:token,
-    login:loginHandler
+    login:loginHandler,
+    isLoggedIn:userIsLoggedIn
 
   };
   return (
