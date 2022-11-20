@@ -4,7 +4,8 @@ import CartContext from "./cart-context";
 const CartProvider = (props) => {
 
     const [addItems,setAddItems] = useState([])
-  const addItemToCart = (item) => {
+    const [token,setToken] = useState()
+    const addItemToCart = (item) => {
     let cartItems=[...addItems]
     let hasItem=false;
     cartItems.forEach((product)=>{
@@ -32,10 +33,18 @@ const CartProvider = (props) => {
     })
   };
 
+  const loginHandler=(token)=>{
+    setToken(token)
+    localStorage.setItem(token)
+  }
+
   const cartContext = {
     items: addItems,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
+    token:token,
+    login:loginHandler
+
   };
   return (
     <CartContext.Provider value={cartContext}>

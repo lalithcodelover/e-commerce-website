@@ -9,6 +9,7 @@ import About from "./pages/about";
 import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
 import ProductDetail from "./pages/ProductDetail";
+import Login from "./pages/Login";
 
 const productsArr = [
   {
@@ -104,6 +105,10 @@ function App() {
       <Route path="/contact">
         <Header />
         <ContactUs getUserDetails={submitUserDetails} />
+      </Route>
+      <Route path='/login'>
+      <Header/>
+        <Login/>
       </Route>
       <Route path='/store/:productId'>
         <ProductDetail/>
