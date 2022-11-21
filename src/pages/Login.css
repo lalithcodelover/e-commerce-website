@@ -30,4 +30,12 @@
     background-color: darkgrey;
     border: 1px solid white;
     border-radius: 5px;
+    display: block;
+}
+
+.switch-btn {
+    border: none;
+    background-color: grey;
+    color: white;
+    margin-top: 10px;
 }

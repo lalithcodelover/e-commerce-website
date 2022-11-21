@@ -4,8 +4,11 @@ import { BrowserRouter} from 'react-router-dom'
 import './index.css';
 import App from './App';
 import 'font-awesome/css/font-awesome.min.css'
+import { AuthContextProvider } from './store/auth-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<BrowserRouter> <App /></BrowserRouter>);
+
+root.render(<BrowserRouter><AuthContextProvider> <App /></AuthContextProvider></BrowserRouter>
+);
 
 

@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./components/Header";
 import React, { useContext, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-
+import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
 import AlbumList from "./components/AlbumList";
 import About from "./pages/about";
@@ -10,8 +10,7 @@ import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
-import CartContext from "./store/cart-context";
-import Store from "./pages/Store";
+import AuthContext from "./store/auth-context";
 
 const productsArr = [
   {
@@ -46,7 +45,9 @@ const productsArr = [
 
 function App() {
   const [cart, setCart] = useState(false);
-  const authCtx = useContext(CartContext)
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+  
   const productList = productsArr.map((product) => {
     return (
       <AlbumList
@@ -84,40 +85,46 @@ function App() {
 
   return (
     <CartProvider>
-      <Switch>
-       <Route path="/store" exact>
-       
-       {authCtx.isLoggedIn && <><Header onShow={openCartHandler} />
-        <Store onClose={closeCartHandller} cart={cart}/>
-        
-        <main>{productList}</main> 
-        </>}
-        {!authCtx.isLoggedIn && <Redirect to='/login'/>}
-       
-      </Route>
+      
+      <Header onShow={openCartHandler} />
+      
+      <main>
+        <Switch>
+          <Route path="/store" exact>
+            {isLoggedIn && (
+              <>
+              {cart && <Cart onClose={closeCartHandller} />}
+                <div className="title">
+                  <h1>The Generics</h1>
+                </div>
+                <h1 className="category">Music</h1>
+                <main>{productList}</main>
+              </>
+            )}
+            {!isLoggedIn && <Redirect to="/login" />}
+          </Route>
 
-      <Route path="/about">
-        <Header></Header>
-        <div className="title">
-          <h1>The Generics</h1>
-        </div>
-        <About />
-      </Route>
-      <Route path="/home">
-        <Home />
-      </Route>
-      <Route path="/contact">
-        <Header />
-        <ContactUs getUserDetails={submitUserDetails} />
-      </Route>
-      <Route path='/login'>
-      <Header/>
-        <Login/>
-      </Route>
-      <Route path='/store/:productId'>
-        <ProductDetail/>
-      </Route>
-      </Switch>
+          <Route path="/about">
+            <div className="title">
+              <h1>The Generics</h1>
+            </div>
+            <About />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/contact">
+            <ContactUs getUserDetails={submitUserDetails} />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/store/:productId">
+            <ProductDetail />
+          </Route>
+        </Switch>
+      </main>
+      
     </CartProvider>
   );
 }

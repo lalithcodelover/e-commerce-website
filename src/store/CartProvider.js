@@ -1,53 +1,52 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
-const initialState =localStorage.getItem('token')
-    const [addItems,setAddItems] = useState([])
-    const [token,setToken] = useState(initialState)
-    const addItemToCart = (item) => {
-
-    let cartItems=[...addItems]
-    let hasItem=false;
-    cartItems.forEach((product)=>{
-        if(product.id===item.id){
-            hasItem=true;
-            product.quantity=Number(product.quantity)+Number(item.quantity)
-        }
-    })
-    if(hasItem){
-        setAddItems(cartItems)
-    }
-    else{
-        setAddItems((prevItem)=>{
-            return [...prevItem,item]
-        })
+  const [addItems, setAddItems] = useState([]);
+  const [crudlist, setCrudlist] = useState([]);
+  const addItemToCart = (item) => {
+    let cartItems = [...addItems];
+    let hasItem = false;
+    cartItems.forEach((product) => {
+      if (product.id === item.id) {
+        hasItem = true;
+        product.quantity = Number(product.quantity) + Number(item.quantity);
+      }
+    });
+    if (hasItem) {
+      setAddItems(cartItems);
+    } else {
+      setAddItems((prevItem) => {
+        return [...prevItem, item];
+      });
     }
   };
   const removeItemFromCart = (item) => {
-    let cartItems = [...addItems]
-    cartItems.forEach((product,index)=>{
-        if(product.id===item.id){
-            cartItems.splice(index,1)
-            setAddItems(cartItems)
-        }
-    })
+    let cartItems = [...addItems];
+    cartItems.forEach((product, index) => {
+      if (product.id === item.id && product.quantity <= 1) {
+        cartItems.splice(index, 1);
+        setAddItems(cartItems);
+      }
+      if (product.id === item.id && product.quantity > 1) {
+        product.quantity = Number(product.quantity) - 1;
+        setAddItems(cartItems);
+      }
+    });
+  };
+  const crudlistHandler = (items) => {
+    setCrudlist(items);
   };
 
-  const loginHandler=(token)=>{
-    setToken(token)
-    localStorage.setItem('token',token)
-  }
-const userIsLoggedIn = !token
   const cartContext = {
     items: addItems,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
-    token:token,
-    login:loginHandler,
-    isLoggedIn:userIsLoggedIn
-
+    crudlist: crudlistHandler,
+    cruditems: crudlist,
   };
+
   return (
     <CartContext.Provider value={cartContext}>
       {props.children}
