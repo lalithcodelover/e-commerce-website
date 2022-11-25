@@ -1,32 +1,41 @@
-import React, { useContext } from "react";
-import AuthContext from "../../store/auth-context";
+// import axios from "axios";
+import React, { useContext} from "react";
+// import AuthContext from "../../store/auth-context";
 import CartContext from "../../store/cart-context";
 
 import "./Cart.css";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
-  const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
 
   const removeItemHandler = (product) => {
     cartCtx.removeItem(product);
+
+    // const email = authCtx.emailid;
+
+    // axios.delete(
+    //   `https://crudcrud.com/api/0a694046be5644e8be71dfb33e25d1e1/cart${email}/${product._id}`
+    // );
   };
 
-  // const cartList = cartCtx.items.map((product) => {
-  const email = authCtx.emailid;
-  fetch(
-    `https://crudcrud.com/api/d6306945df944bdc82c0ff79d2b72b05/cart${email}`
-  )
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      cartCtx.crudlist(data);
-    });
+  const cartList = cartCtx.items.map((product) => {
 
-  const crudList = cartCtx.cruditems.map((product) => {
+  // const email = authCtx.emailid;
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://crudcrud.com/api/0a694046be5644e8be71dfb33e25d1e1/cart${email}`
+  //     )
+  //     .then((res) => {
+  //       return cartCtx.crudlist(res.data);
+  //     });
+  // }, []);
+
+  // const crudList = cartCtx.cruditems.map((product) => {
     return (
-      <div className="cartitems">
+      <li key={product.id} className="cartitems">
         <span className="cart-col">
           <img src={product.imageUrl} alt={product.title} width="100px" />
           <span>{product.title}</span>
@@ -43,7 +52,7 @@ const Cart = (props) => {
             Remove
           </button>
         </span>
-      </div>
+      </li>
     );
   });
   let Total = 0;
@@ -61,7 +70,7 @@ const Cart = (props) => {
         <div>PRICE</div>
         <div>QUANTITY</div>
       </div>
-      <div className="cartdetails">{crudList}</div>;
+      <div className="cartdetails">{cartList}</div>;
       <div className="total-price">Total: ${Total}</div>
     </div>
   );

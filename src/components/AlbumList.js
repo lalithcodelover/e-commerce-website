@@ -1,14 +1,16 @@
+// import axios from "axios";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../store/auth-context";
+// import AuthContext from "../store/auth-context";
 import CartContext from "../store/cart-context";
 import "./AlbumList.css";
 
 const AlbumList = (props) => {
   const cartCtx = useContext(CartContext);
-  const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
   const addToCart = (e) => {
     e.preventDefault();
+
     cartCtx.addItem({
       id: props.id,
       title: props.title,
@@ -17,23 +19,18 @@ const AlbumList = (props) => {
       price: props.price,
     });
 
-    let email = authCtx.emailid;
-    fetch(
-      `https://crudcrud.com/api/d6306945df944bdc82c0ff79d2b72b05/cart${email}`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          id: props.id,
-          title: props.title,
-          imageUrl: props.image,
-          quantity: props.quantity,
-          price: props.price,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // let email = authCtx.emailid;
+
+    // axios.post(
+    //   `https://crudcrud.com/api/0a694046be5644e8be71dfb33e25d1e1/cart${email}`,
+    //   {
+    //     id: props.id,
+    //     title: props.title,
+    //     imageUrl: props.image,
+    //     quantity: props.quantity,
+    //     price: props.price,
+    //   }
+    // );
   };
 
   let url = `/store/${props.id}`;
