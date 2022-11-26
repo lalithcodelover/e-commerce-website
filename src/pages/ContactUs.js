@@ -19,8 +19,9 @@ props.getUserDetails(userDetails)
     }
   return (
     <div className='form-box'>
-        <h1>User Details</h1>
+      <h1>User Details</h1>  
       <form className="user-form" onSubmit={submitHandler}>
+      
         <label htmlFor="name">Name</label>
         <input type="text" ref={nameRef}/>
         <label htmlFor="email">Email ID</label>

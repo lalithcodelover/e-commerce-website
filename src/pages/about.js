@@ -5,6 +5,10 @@ import 'font-awesome/css/font-awesome.min.css'
 const About = () => {
   return (
     <div>
+      
+      <div className="title">
+              <h1>The Generics</h1>
+            </div>
       <h1>About</h1>
       <div className="content">
         <img className="about-image" src={design} alt="design"  />

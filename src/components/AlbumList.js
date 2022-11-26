@@ -10,7 +10,14 @@ const AlbumList = (props) => {
   // const authCtx = useContext(AuthContext);
   const addToCart = (e) => {
     e.preventDefault();
-
+    const obj = {
+      id: props.id,
+      title: props.title,
+      imageUrl: props.image,
+      quantity: props.quantity,
+      price: props.price,
+    };
+    localStorage.setItem(props.id, JSON.stringify(obj));
     cartCtx.addItem({
       id: props.id,
       title: props.title,

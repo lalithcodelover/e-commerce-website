@@ -103,11 +103,7 @@ function App() {
             )}
             {!isLoggedIn && <Redirect to="/login" />}
           </Route>
-
           <Route path="/about">
-            <div className="title">
-              <h1>The Generics</h1>
-            </div>
             <About />
           </Route>
           <Route path="/home">

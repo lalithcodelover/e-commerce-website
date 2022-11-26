@@ -1,5 +1,5 @@
 // import axios from "axios";
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 // import AuthContext from "../../store/auth-context";
 import CartContext from "../../store/cart-context";
 
@@ -11,6 +11,7 @@ const Cart = (props) => {
 
   const removeItemHandler = (product) => {
     cartCtx.removeItem(product);
+    localStorage.removeItem(product.id);
 
     // const email = authCtx.emailid;
 
@@ -19,21 +20,34 @@ const Cart = (props) => {
     // );
   };
 
-  const cartList = cartCtx.items.map((product) => {
+//Storing in local storage  
+  // const list = Object.keys(localStorage);
+  // console.log(list);
+  // const detail = list.filter((item) => item !== "token");
+  // console.log(detail);
+  // let obj = [];
+  // detail.forEach((item) => {
+  //   obj.push(JSON.parse(localStorage.getItem(item)));
+  // });
+  // console.log(obj);
+  // const cartList = obj.map((product) => {
 
-  // const email = authCtx.emailid;
 
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://crudcrud.com/api/0a694046be5644e8be71dfb33e25d1e1/cart${email}`
-  //     )
-  //     .then((res) => {
-  //       return cartCtx.crudlist(res.data);
-  //     });
-  // }, []);
+    // const email = authCtx.emailid;
 
-  // const crudList = cartCtx.cruditems.map((product) => {
+    // useEffect(() => {
+    //   axios
+    //     .get(
+    //       `https://crudcrud.com/api/0a694046be5644e8be71dfb33e25d1e1/cart${email}`
+    //     )
+    //     .then((res) => {
+    //       return cartCtx.crudlist(res.data);
+    //     });
+    // }, []);
+
+    // const crudList = cartCtx.cruditems.map((product) => {
+  
+      const cartList = cartCtx.items.map((product) => {
     return (
       <li key={product.id} className="cartitems">
         <span className="cart-col">
